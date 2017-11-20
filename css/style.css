@@ -181,17 +181,14 @@ h1 {
     width: 80%;
 }
 
-/* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
+/* The Play Again Button */
+.play-again {
+    font-size: 20px;
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-    color: #000;
+.play-again:hover,
+.play-again:focus {
     text-decoration: none;
     cursor: pointer;
 }

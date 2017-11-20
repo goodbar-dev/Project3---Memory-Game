@@ -148,7 +148,8 @@ function findCardMatch(selectedCard) {
           //display message with the final score once all cards have been matched
           //alert('All Cards Matched in ' + moveCount + ' moves!');
           $('.modal-content p').remove();
-          $('.modal-content').append("<p>Congratulations!  You won in " + moveCount + " moves and " + gameTimeCount + " seconds!");
+          $('.modal-content').prepend("<p>Congratulations!  You won in " + moveCount + " moves and " + gameTimeCount + " seconds!  " +
+                                      "  You earned " + getStarRating() + " star(s).");
           $('#myModal').css("display", "block");
         }
       }
@@ -220,6 +221,20 @@ function onCardClicked() {
 //When the closed button is clicked on the modal window.
 function onModalClosedClicked() {
   $('#myModal').css("display", "none");
+  buildBoard();
+}
+
+//Check what the star rating is.
+function getStarRating() {
+  if ($('#star-3').hasClass('fa-star')) {
+    return 3;
+  } else if ($('#star-2').hasClass('fa-star')) {
+    return 2;
+  } else if ($('#star-1').hasClass('fa-star')) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 
 /* END FUNCTIONS */
@@ -227,5 +242,5 @@ function onModalClosedClicked() {
 $(document).ready(function() {
   buildBoard();
   $('.restart').on('click', buildBoard);
-  $('.close').on('click', onModalClosedClicked);
+  $('.play-again').on('click', onModalClosedClicked);
 });
