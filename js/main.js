@@ -107,6 +107,14 @@ function buildBoard() {
   $('.moves').text(moveCount);
   $('.time').text(" (0 seconds)");
 
+  //initialize star ratings
+  $('#star-3').removeClass('fa-star-o');
+  $('#star-3').addClass('fa-star');
+  $('#star-2').removeClass('fa-star-o');
+  $('#star-2').addClass('fa-star');
+  $('#star-1').removeClass('fa-star-o');
+  $('#star-1').addClass('fa-star');
+
   //shuffle the list of cards
   shuffle(cards);
 
@@ -173,6 +181,18 @@ function onCardClicked() {
     //increment click counter
     moveCount++;
     $('.moves').text(moveCount);
+
+    //check move count and decrement stars if needed.
+    if (moveCount == 20) {
+      $('#star-3').removeClass('fa-star');
+      $('#star-3').addClass('fa-star-o');
+    } else if (moveCount == 30) {
+      $('#star-2').removeClass('fa-star');
+      $('#star-2').addClass('fa-star-o');
+    } else if (moveCount == 40) {
+      $('#star-1').removeClass('fa-star');
+      $('#star-1').addClass('fa-star-o');
+    }
 
     //display the card.
     selectedCard.flip();
