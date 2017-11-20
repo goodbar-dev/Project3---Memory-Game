@@ -17,10 +17,10 @@ let Card = function(name) {
   this.name = name;
   this.displayed = false;
   this.locked = false;
-};
+}
 Card.prototype.flip = function() {
   $('#card-' + this.id).toggleClass("flipped");
-};
+}
 Card.prototype.isDisplayed = function() {
   if ($('#card-' + this.id).hasClass("flipped")) {
     this.displayed = true;
@@ -31,7 +31,7 @@ Card.prototype.isDisplayed = function() {
 Card.prototype.lock = function() {
   this.locked = true;
   $('#card-' + this.id + ' figure:last-child').addClass("match");
-};
+}
 
 /* END CLASSES */
 
@@ -90,8 +90,9 @@ function shuffle(array) {
     return array;
 }
 
-/*
+/**
  * Display the cards on the page
+ *   - initialize the board/counters/stars
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
@@ -147,7 +148,7 @@ function findCardMatch(selectedCard) {
           //display message with the final score once all cards have been matched
           //alert('All Cards Matched in ' + moveCount + ' moves!');
           $('.modal-content p').remove();
-          $('.modal-content').append("<p>Contratulations!  You won in " + moveCount + " moves and " + gameTimeCount + " seconds!");
+          $('.modal-content').append("<p>Congratulations!  You won in " + moveCount + " moves and " + gameTimeCount + " seconds!");
           $('#myModal').css("display", "block");
         }
       }
@@ -213,6 +214,7 @@ function onCardClicked() {
   }
 }
 
+//When the closed button is clicked on the modal window.
 function onModalClosedClicked() {
   $('#myModal').css("display", "none");
 }
