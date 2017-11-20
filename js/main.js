@@ -198,13 +198,16 @@ function onCardClicked() {
     //display the card.
     selectedCard.flip();
 
+    //after short delay, check if there is a match.
+    //this is done so that the cards do not immediately flip back
+    //preventing you from seeing the 2nd card.
     setTimeout(function() {
       if (!findCardMatch(selectedCard)) {
         //add selected card to list of open cards
         openCards.push(selectedCard);
 
         if (openCards.length == 2) {
-          //hide both cards after short delay
+          //hide both cards
           openCards[0].flip();
           openCards[1].flip();
           openCards = [];
