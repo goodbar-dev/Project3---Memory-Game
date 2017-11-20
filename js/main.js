@@ -61,10 +61,19 @@ let cards = new Array(
 let openCards = new Array();
 //holds the number of clicks it takes to find all matches.
 let moveCount;
+//holds the number of clicks it takes to find all matches.
+let gameTimeCount;
+//initializes timer counting every second.
+let gameTimer = setInterval(onGameTimerCount, 1000);
 
 /* END VARIABLES */
 
 /* BEGIN FUNCTIONS */
+
+function onGameTimerCount(){
+  gameTimeCount++;
+  $('.time').text(" (" + gameTimeCount + " seconds)");
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -92,9 +101,11 @@ function buildBoard() {
   $('.deck').empty();
   openCards = [];
 
-  //initialize counter
+  //initialize counters
   moveCount = 0;
+  gameTimeCount = 0;
   $('.moves').text(moveCount);
+  $('.time').text(" (0 seconds)");
 
   //shuffle the list of cards
   shuffle(cards);
@@ -123,10 +134,12 @@ function findCardMatch(selectedCard) {
         matchFound = true;
 
         if (allCardsMatched()) {
+          //stop timer
+          clearTimeout(gameTimer);
           //display message with the final score once all cards have been matched
           //alert('All Cards Matched in ' + moveCount + ' moves!');
           $('.modal-content p').remove();
-          $('.modal-content').append("<p>Contratulations!  You won in " + moveCount + " moves!");
+          $('.modal-content').append("<p>Contratulations!  You won in " + moveCount + " moves and " + gameTimeCount + " seconds!");
           $('#myModal').css("display", "block");
         }
       }
