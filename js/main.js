@@ -27,6 +27,8 @@ Card.prototype.isDisplayed = function() {
   } else {
     this.displayed = false;
   }
+
+  return this.displayed;
 }
 Card.prototype.lock = function() {
   this.locked = true;
@@ -64,7 +66,7 @@ let moveCount;
 //holds the number of clicks it takes to find all matches.
 let gameTimeCount;
 //initializes timer counting every second.
-let gameTimer = setInterval(onGameTimerCount, 1000);
+let gameTimer;
 
 /* END VARIABLES */
 
@@ -103,6 +105,8 @@ function buildBoard() {
   openCards = [];
 
   //initialize counters
+  clearTimeout(gameTimer);
+  gameTimer = setInterval(onGameTimerCount, 1000);
   moveCount = 0;
   gameTimeCount = 0;
   $('.moves').text(moveCount);
@@ -113,8 +117,6 @@ function buildBoard() {
   $('#star-3').addClass('fa-star');
   $('#star-2').removeClass('fa-star-o');
   $('#star-2').addClass('fa-star');
-  $('#star-1').removeClass('fa-star-o');
-  $('#star-1').addClass('fa-star');
 
   //shuffle the list of cards
   shuffle(cards);
@@ -136,7 +138,7 @@ function findCardMatch(selectedCard) {
   for (let i = 0; i < openCards.length; i++) {
       //check if card symbol name matches any open cards; if so,
       //leave them flipped and lock them.
-      if (selectedCard.name == openCards[i].name) {
+      if (selectedCard.name == openCards[i].name && selectedCard != openCards[i]) {
         selectedCard.lock();
         openCards[i].lock();
         openCards = [];
@@ -191,9 +193,6 @@ function onCardClicked() {
     } else if (moveCount == 30) {
       $('#star-2').removeClass('fa-star');
       $('#star-2').addClass('fa-star-o');
-    } else if (moveCount == 40) {
-      $('#star-1').removeClass('fa-star');
-      $('#star-1').addClass('fa-star-o');
     }
 
     //display the card.
@@ -230,10 +229,8 @@ function getStarRating() {
     return 3;
   } else if ($('#star-2').hasClass('fa-star')) {
     return 2;
-  } else if ($('#star-1').hasClass('fa-star')) {
-    return 1;
   } else {
-    return 0;
+    return 1;
   }
 }
 

@@ -79,8 +79,8 @@ h1 {
 }
 
 .card figure {
-  height: 125px;
-  width: 125px;
+  height: 100%;
+  width: 100%;
   color: #ffffff;
   background: #2e3d49;
   font-size: 0;
@@ -91,6 +91,8 @@ h1 {
   align-items: center;
   box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
   position: absolute;
+  margin: 0;
+  padding: 0;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -o-backface-visibility: hidden;
